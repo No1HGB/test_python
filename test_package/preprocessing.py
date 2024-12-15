@@ -6,6 +6,10 @@ def preprocessing_data(df: pd.DataFrame):
     def calculate_average_price(row):
         return (row["close"] + row["open"]) / 2
 
+    # 기초 재무항목 설정
+    df = df.sort_values(["ticker", "date"]).reset_index()
+    df["useItem0"] = df["FCF(QSUM)"]
+
     df["SPS"] = df["Total Revenue"] / df["Number Of Shares"]
     df["avg_price"] = df.apply(calculate_average_price, axis=1)
     df["Market Cap"] = df["Number Of Shares"] * df["close"]
