@@ -11,3 +11,4 @@
 ### pip
 
 - pip install -r requirements.txt 로 패키지 설치
+- 12/17 특정 패키지 설치
