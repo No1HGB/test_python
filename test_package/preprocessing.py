@@ -10,9 +10,10 @@ def preprocessing_data(df: pd.DataFrame):
     df["Market Cap"] = pd.to_numeric(
         df["Number Of Shares"] * df["close"]
     )  # 2022-11-24 수정
-    df["fcf_rank"] = df["useItem0"] / df["Market Cap"]
+    df["fcf_rank"] = df["useItem0"] / df["Market Capital"]
     # FCF(QSUM) 이 0보다 큰 회사만 남은 상태에서 시가총액이 큰 회사를 고름
     df["rank1"] = df.groupby(by="date")["fcf_rank"].rank(ascending=True, method="first")
+    df["avg_price"] = (df["open"]+df["close"])/2
 
     # 최종적으로 회사의 시총이 크면서 FCF(QSUM) 도 큰 회사를 뽑음
     df["total_rankvalue"] = df["rank1"]
